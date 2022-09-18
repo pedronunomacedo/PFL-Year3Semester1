@@ -1,5 +1,3 @@
--- isPrime :: Integral n => n -> Bool
-
 isPrime n
   | (n <= 1)       = False
   | (n == 2)       = True
