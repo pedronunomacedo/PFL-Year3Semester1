@@ -1,0 +1,1 @@
+myFst (first, _) = first
