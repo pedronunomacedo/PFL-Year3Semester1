@@ -1,0 +1,16 @@
+a) [1,2]
+b) [1,2]
+c) error - The right operand in cons must always be a list
+d) error - The concatenation is invalid since the first operand is a list of integers and the last one is a list of lists of integers
+e) [1,2,3,4]
+f) 2
+g) 'd' - When we have "(...)!!3", the "!!3" it means the character in index 3
+h) 3 - The "init" function returns all elements except the last one
+i) [[2],[1]] - The operator ":" constructs a list by taking an element and a list. The operator "++" concatenates lists.
+                So, in this case, we can consider the first element as being the "[1]", and when we do ":" we need a list as a second argument.
+                So, we will have, as a result, a list of lists.
+j) "aaa" - The function repeat, will make an infinite string of a's. And when we use the function "take" with number 3, we only want the string of length 3.
+k) "abcdabcd..."
+l) [('a',1),('a',2),('a',3)] - The function 'repeat' will repeat the character 'a' infinite times. The function "zip" will join together the elements of two
+                                lists with the same index. The result will be a list of tuples. The function "zip" works with different lengths of the two
+                                lists, and the result list will have the length of the shortest list.
