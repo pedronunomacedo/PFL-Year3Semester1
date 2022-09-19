@@ -1,0 +1,14 @@
+a) []
+b) [[1,2],[],[3,4],[5]]
+c) [1,2]:[]:[3]:[[4,5]]
+d) [4,5]
+e) 3 - By reading the expression from right to left, one can see the rightmost empty list
+        is not converted to an element of the output's list.
+f) error - The expression is invalid since the rightmost operand indicates the list is composed
+            by integers, while the other operands suggest the output is a list of integers.
+g) [1,2,3,4,5]
+h) [[],[],[]]
+i) ["abc","","dce"] - Why the middle element is an empty string, and not an empty list???
+j) [[],[2],[3]] ???
+k) 12
+l) True
