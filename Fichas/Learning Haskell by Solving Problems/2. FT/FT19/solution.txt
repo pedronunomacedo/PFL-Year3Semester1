@@ -1,0 +1,8 @@
+The function f computes the second largest element of a list by scanning it only once.
+
+Additional information :
+  - An auxiliary function g contains two extra arguments to store the largest and the
+    second largest elements found so far. In the base case of function g, the second
+    largest element (i.e. the third argument) is returned. The recursion cases of g
+    and he definition of f use guards to ensure g's extra arguments are always
+    correctly updated.
