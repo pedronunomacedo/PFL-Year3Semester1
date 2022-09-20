@@ -80,3 +80,31 @@ classificaIMC peso altura
   | (imc >= 25 && imc < 30)   = "excesso de peso"
   | (imc >= 30)               = "obesidade"
   where imc = peso / (altura^2)
+
+
+-- 1.11 a)
+max3, min3 :: Ord a => a -> a -> a -> a
+max3 x y z
+  | (x >= y && x >= z) = x
+  | (y >= x && y >= z) = y
+  | (z >= x && z >= y) = z
+
+min3 x y z
+  | (x <= y && x <= z) = x
+  | (y <= x && y <= z) = y
+  | (z <= x && z <= y) = z
+
+-- 1.11 b)
+max3recur :: Ord a => a -> a -> a -> a
+max3recur x y z = max (max x y) z
+
+min3recur :: Ord a => a -> a -> a -> a
+min3recur x y z = min (min x y) z
+
+-- 1.12
+xor :: Bool -> Bool -> Bool
+xor x y
+  | x && y             = False
+  | (not x) && y       = True
+  | x && (not y)       = True
+  | (not x) && (not y) = False
