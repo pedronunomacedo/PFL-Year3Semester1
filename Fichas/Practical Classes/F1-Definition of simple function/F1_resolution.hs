@@ -57,3 +57,17 @@ raizes a b c = (r1, r2)
   -- b) trocar :: (t1,t2) -> (t2,t1)
   -- c) par :: t1,t2 -> (t1,t2)
   -- d) dobro :: t -> t
+  -- e)
+  -- f)
+  -- g)
+  -- h)
+  -- i)
+
+-- 1.9
+classifica :: Int -> String
+classifica n
+  | (n <= 9)             = "reprovado"
+  | (n >= 10 && n <= 12) = "suficiente"
+  | (n >= 13 && n <= 15) = "bom"
+  | (n >= 16 && n <= 18) = "muito bom"
+  | (n >= 19 && n <= 20) = "muito bom com distincao"
