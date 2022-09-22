@@ -133,3 +133,17 @@ curta2Aux :: [a] -> Int
 curta2Aux = curta2Aux 0
     where curta2Aux a [] = a
           curta2Aux a (_:xs) = curta2Aux (a+1) xs
+
+-- 1.15 a)
+mediana x y z
+  | ((y <= x && x <= z) || (z <= x && x <= y)) = x
+  | ((x <= y && y <= z) || (z <= y && y <= x)) = y
+  | ((x <= z && z <= y) || (y <= z && z <= x)) = z
+  | otherwise = error "Error"
+
+-- 1.15 b)
+mediana2 x y z = (x + y + z) - menores
+  where menores
+          | ((x <= y && x <= z && y <= z) || (z <= y && z <= x && y <= x)) = x + z
+          | ((y <= x && y <= z && x <= z) || (z <= x && z <= y && x <= y)) = y + z
+          | ((y <= z && y <= x && z <= x) || (x <= z && x <= y && z <= y)) = x + y
