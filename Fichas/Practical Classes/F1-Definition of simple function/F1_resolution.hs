@@ -1,3 +1,6 @@
+main :: IO ()
+main = return ()
+
 -- 1.1
 -- testaTriangulo :: Float -> Float -> Float -> Bool
 testaTriangulo a b c = (a < b + c && b < a + c && c < a + b)
@@ -108,3 +111,25 @@ xor x y
   | (not x) && y       = True
   | x && (not y)       = True
   | (not x) && (not y) = False
+
+-- 1.13
+safetail1 :: [a] -> [a]
+safetail1 l
+  | (length l) == 0 = []
+  | otherwise = (tail l)
+
+safetail2 :: [a] -> [a]
+safetail2 l = if (length l == 0) then [] else (tail l)
+
+-- 1.14 a)
+curta1 :: [a] -> Bool
+curta1 l = if (length l <= 2) then True else False
+
+-- 1.14 b)
+curta2 :: [a] -> Bool
+curta2 xs = if (null xs) then True else (if (curta2Aux xs) <= 2 then True else False)
+
+curta2Aux :: [a] -> Int
+curta2Aux = curta2Aux 0
+    where curta2Aux a [] = a
+          curta2Aux a (_:xs) = curta2Aux (a+1) xs
