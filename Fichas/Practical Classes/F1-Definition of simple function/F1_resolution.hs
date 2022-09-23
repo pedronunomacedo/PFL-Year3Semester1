@@ -1,3 +1,4 @@
+import Data.Maybe (fromJust)
 main :: IO ()
 main = return ()
 
@@ -147,3 +148,67 @@ mediana2 x y z = (x + y + z) - menores
           | ((x <= y && x <= z && y <= z) || (z <= y && z <= x && y <= x)) = x + z
           | ((y <= x && y <= z && x <= z) || (z <= x && z <= y && x <= y)) = y + z
           | ((y <= z && y <= x && z <= x) || (x <= z && x <= y && z <= y)) = x + y
+
+-- 1.16
+converte :: Int -> String
+converte n
+  | n <    0 || n >= maxlim = "ERROR"
+  | n >=   0 && n <= 9      = f (n,0)
+  | n >=  10 && n <  20     = f (n,1)
+  | n >=  20 && n < 100     = f (n `div`  10, 2) +:+ if n `mod`  10 == 0 then "" else converte (n `mod`  10)
+  | n == 100                = "cem"  -- caso especial
+  | n >  100 && n < 1000    = f (n `div` 100, 3) +:+ if n `mod` 100 == 0 then "" else converte (n `mod` 100)
+  | n <= 1000000            = unwords $ map (\(x,y) -> if x `mod` 1000 == 0 then "" else converte x +:+ f (y, is1 x)) (reverse $ zip (reverse $ digs3 n) [0..])
+  | otherwise               = error "Number given is bigger than 1000000"
+
+   where
+       (+:+) [] [] = []
+       (+:+) xs [] = xs
+       (+:+) [] ys = ys
+       (+:+) xs ys = unwords [xs, ys]
+
+maxlim = (10^) . (*3) $ 5
+
+is1 1 = 5
+is1 _ = 4
+
+digs3 0 = []
+digs3 x = let d = x `div` 1000
+              m = x `mod` 1000
+         in digs3 d ++ m:[]
+
+countdigs = length . digits
+
+digits x | x >= 10   = (x `div` 10) : digits (x `mod` 10)
+        | otherwise = [x]
+
+fst3 (x,_,_) = x
+snd3 (_,x,_) = x
+thr3 (_,_,x) = x
+
+f (c,0) = thr3 . fromJust $ lookup c conv100
+f (c,1) =        fromJust $ lookup c conv10
+f (c,2) = snd3 . fromJust $ lookup c conv100
+f (c,3) = fst3 . fromJust $ lookup c conv100
+f (c,4) = snd .  fromJust $ lookup c convplus
+f (c,5) = fst .  fromJust $ lookup c convplus
+
+conv10 = zip [10..]["dez", "onze", "doze", "treze", "quatorze", "quinze", "dezasseis", "dezassete", "dezoito", "dezanove"]
+conv100 =  zip [0..]
+          [("", "", "zero"),
+           ("cento", "dez", "um"),
+           ("duzentos", "vinte", "dois"),
+           ("trezentos", "trinta", "tres"),
+           ("quatrozentos", "quarenta", "quatro"),
+           ("quinhentos", "cinquenta", "cinco"),
+           ("seiscentos", "sessenta", "seis"),
+           ("setecentos", "setenta", "sete"),
+           ("oitocentos", "oitenta", "oito"),
+           ("novecentos", "noventa", "nove")]
+
+convplus = zip [0..]
+         [("",                ""),
+          ("mil",             "mil"),
+          ("milhao",          "milhoes"),
+          ("milhar de milhao","milhares de milhoes"),
+          ("biliao",          "bilioes")]
