@@ -193,6 +193,42 @@ f (c,3) = fst3 . fromJust $ lookup c conv100
 f (c,4) = snd .  fromJust $ lookup c convplus
 f (c,5) = fst .  fromJust $ lookup c convplus
 
+{--
+converte :: Int -> String
+converte n
+  | (n >= 0 && n <= 9) = f (n,0)
+  | (n >= 10 && n <= 19) = f (n,1)
+  | (n >= 20 && n <= 99 && mod n 10 == 0) = f (n,2)
+  | (n >= 20 && n <= 99) = f (n,3)
+  | (n == 100) = "cem"
+  | (n > 100 && n <= 999 && mod (n `div` 10) 10 == 0) = f (n,4) -- 1|9 ++ 0 ++ 1|9
+  | (n > 100 && n <= 999 && mod (n `div` 10) 10 == 1) = f (n,5) -- 1|9 ++ 1 ++ 1|9
+  | (n > 100 && n <= 999 && mod n 10 == 0) = f (n,6) -- 1|9 ++ 2|9 ++ 0
+  | (n > 100 && n <= 999) = f (n,7) -- 1|9 ++ 2|9 ++ 1|9
+  | (n == 1000) = "mil"
+  | (n > 1000 && n <= 1999 && mod (n `div` 10) 10 == 0 && mod (n `div` 100) 10 == 0) = f (n,8)
+  | (n > 1000 && n <= 1999 && mod (n `div` 10) 10 == 1 && mod (n `div` 100) 10 == 0) = f (n,9)
+  | (n > 1000 && n <= 1999) = f (n,10)
+  | otherwise = "Invalid number!"
+
+
+fst3 (x,_,_) = x -- 1st element of the tuple
+snd3 (_,x,_) = x -- 2nd element of the tuple
+thr3 (_,_,x) = x -- 3rd element of the tuple
+
+f (c,0) = thr3 ( fromJust (lookup c conv100) )
+f (c,1) =        fromJust (lookup c conv10)
+f (c,2) = snd3 ( fromJust (lookup (c `div` 10) conv100) )
+f (c,3) = f (c,2) ++ " e " ++ f (mod c 10,0)
+f (c,4) = fst3 ( fromJust (lookup (c `div` 100) conv100) ) ++ " e " ++ f (mod c 10,0) -- 1|9 ++ 0 ++ 1|9
+f (c,5) = fst3 ( fromJust (lookup (c `div` 100) conv100) ) ++ " e " ++ f (mod c 100,1) -- 1|9 ++ 1 ++ 1|9
+f (c,6) = fst3 ( fromJust (lookup (c `div` 100) conv100) ) ++ " e " ++ snd3 ( fromJust (lookup (mod (c `div` 10) 10) conv100) ) -- 1|9 ++ 2|9 ++ 0
+f (c,7) = fst3 ( fromJust (lookup (c `div` 100) conv100) ) ++ " e " ++ f (mod c 100,3)
+f (c,8) = "mil e " ++ f (mod c 10,0)
+f (c,9) = "mil e " ++ f (mod c 100,1)
+f (c,10) = "mil " ++ f(mod c 1000,6)
+--}
+
 conv10 = zip [10..]["dez", "onze", "doze", "treze", "quatorze", "quinze", "dezasseis", "dezassete", "dezoito", "dezanove"]
 conv100 =  zip [0..]
           [("", "", "zero"),
