@@ -55,3 +55,50 @@ myInsert n (a:xs)
 myIsort :: Ord a => [a] -> [a]
 myIsort [] = []
 myIsort (x:xs) = myInsert x (myIsort xs)
+
+-- 2.5 a)
+myMinimum :: Ord a => [a] -> a
+myMinimum [l] = l
+myMinimum (x:xs) = myMinimumAux x xs
+
+myMinimumAux min [l] = if (l <= min) then l else min
+myMinimumAux min (x:xs)
+  | x < min = myMinimumAux x xs
+  | otherwise = myMinimumAux min xs
+
+-- 2.5 b)
+myDelete :: Ord a => a -> [a] -> [a]
+myDelete n [] = error "Number not found!"
+myDelete n (x:xs)
+  | n == x    = xs
+  | otherwise = [x] ++ myDelete n xs
+
+-- 2.5 c)
+mySsort :: Ord a => [a] -> [a]
+mySsort [] = []
+mySsort l = [myMinimum l] ++ mySsort (myDelete (myMinimum l) l)
+
+-- 2.6
+sumUntil100 = sum [n^2 | n <- [1..100]]
+
+-- 2.7 a)
+aprox :: Int -> Double
+aprox 0 = 1
+aprox n = ((fromIntegral ((-1)^n)) / (fromIntegral (2 * n + 1))) + aprox (n-1)
+
+-- 2.7 b)
+aprox' :: Int -> Double
+aprox' 0 = 1
+aprox' k = ((fromIntegral ((-1)^k)) / (fromIntegral ((k+1)^2))) + aprox (k-1)
+
+-- 2.7
+{--
+  Comparando aprox com aprox', podemos verificar que o aprox' é mais eficaz que o aprox.
+  aprox 10 = 0.8080789523513985
+  aprox' 10 = 0.7687243675422681
+  aprox 100 = 0.7878733502677479
+  aprox' 100 = 0.7829962554945791
+  aprox 1000 = 0.7856479135848861
+  aprox' 1000 = 0.7851491614629446
+  pi/4 ≈ 0.785398163
+--}
