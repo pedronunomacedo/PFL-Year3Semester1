@@ -102,3 +102,36 @@ aprox' k = ((fromIntegral ((-1)^k)) / (fromIntegral ((k+1)^2))) + aprox (k-1)
   aprox' 1000 = 0.7851491614629446
   pi/4 ≈ 0.785398163
 --}
+
+-- 2.8
+dotprod :: [Float] -> [Float] -> Float
+dotprod a b = sum [ x * y | (x, y) <- zip a b ]
+
+-- 2.9
+divprop :: Integer -> [Integer]
+divprop n = [i | i <- [1..(n-1)], mod n i == 0]
+
+-- 2.10
+perfeitos :: Integer -> [Integer]
+perfeitos n = [i | i <- [2..(n-1)], sum (divprop i) == i]
+
+-- 2.11
+pitagoricos :: Integer -> [(Integer, Integer, Integer)]
+pitagoricos n = [(x,y,z) | x <- [1..n], y <- [1..n], z <- [1..n], x^2 + y^2 == z^2]
+
+-- 2.12
+primo :: Integer -> Bool
+primo n = if (length( divprop n ) == 1) then True else False
+
+-- 2.13 ???
+mersennes :: [Int]
+mersennes = [i | i <- [1..30], primo (2^i - 1)]
+
+-- 2.14
+binom :: Integer -> Integer -> Integer
+binom n k = product [1..n] `div` (product [1..k] * product [1..(n-k)])
+
+pascal :: Integer -> [[Integer]]
+pascal m = [l | n <- [0..m], let l = [binom n k | k <- [0..n]]]
+
+-- 2.15 ????
