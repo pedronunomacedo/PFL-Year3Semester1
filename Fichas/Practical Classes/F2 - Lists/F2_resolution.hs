@@ -1,3 +1,6 @@
+-- import libraries (the imports need to be all in the beginning of the file)
+import Data.Char
+
 -- 2.1 a)
 myAnd :: [Bool] -> Bool
 myAnd [] = True
@@ -134,4 +137,30 @@ binom n k = product [1..n] `div` (product [1..k] * product [1..(n-k)])
 pascal :: Integer -> [[Integer]]
 pascal m = [l | n <- [0..m], let l = [binom n k | k <- [0..n]]]
 
--- 2.15 ????
+-- 2.15
+cifrar :: Int -> String -> String
+cifrar n s = [
+  if (fromEnum c > 64 && fromEnum c < 91) then toEnum (65 + mod (fromEnum c - 65 + n) 26) else
+  if (fromEnum c > 96 && fromEnum c < 123) then toEnum (96 + mod (fromEnum c - 96 + n) 26) else c | c <- s]
+
+-- 2.16
+myConcat2 :: [[a]] -> [a]
+myConcat2 l = [x | sub <- l, x <- sub]
+
+myReplicate2 :: Int -> a -> [a]
+myReplicate2 n c = [c | _ <- [1..n]]
+
+twoExclamations2 :: Integral b => [a] -> b -> a
+twoExclamations2 l n = head [ x | (x,i) <- zip l [0 ..], i == n ]
+
+-- 2.17
+forte :: String -> Bool
+forte str = length str >= 8 && myOr (map isUpper str) && myOr (map isLower str) && myOr (map isDigit str)
+
+-- 2.18 a)
+mindiv :: Int -> Int
+mindiv n = head ([i | i <- [2..round (sqrt (fromIntegral n))], mod n i == 0] ++ [n])
+
+-- 2.18 b)
+primo2 :: Int -> Bool
+primo2 n = if (n > 1 && (mindiv n) == n) then True else False
