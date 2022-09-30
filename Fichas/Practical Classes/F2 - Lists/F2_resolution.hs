@@ -1,5 +1,6 @@
 -- import libraries (the imports need to be all in the beginning of the file)
 import Data.Char
+import Data.List
 
 -- 2.1 a)
 myAnd :: [Bool] -> Bool
@@ -164,3 +165,49 @@ mindiv n = head ([i | i <- [2..round (sqrt (fromIntegral n))], mod n i == 0] ++ 
 -- 2.18 b)
 primo2 :: Int -> Bool
 primo2 n = if (n > 1 && (mindiv n) == n) then True else False
+
+-- 2.19
+myNub :: Eq a => [a] -> [a]
+myNub [] = []
+myNub (x:xs) = x:myNub [y | y <- xs, y /= x]
+
+-- 2.20
+myTranspose :: [[a]] -> [[a]]
+myTranspose xss = [ [xs!!i | xs <- xss] | i <- [0..(z-1)] ]
+                  where z = length (head xss)
+
+-- 2.21
+algarismos :: Int -> [Int]
+algarismos 0 = []
+algarismos num = algarismos (num `div` 10) ++ [mod num 10]
+
+-- 2.22
+toBits :: Int -> [Int]
+toBits 0 = []
+toBits num = toBits (num `div` 2) ++ [mod num 2]
+
+-- 2.23
+fromBits :: [Int] -> Int
+fromBits [] = 0
+fromBits arr = (head arr) * 2^(length arr - 1) + fromBits (tail arr)
+
+-- 2.24 a)
+merge :: Ord a => [a] -> [a] -> [a]
+merge xs [] = xs
+merge [] ys = ys
+merge (x:xs) (y:ys)
+  | x < y     = x : merge xs (y:ys)
+  | otherwise = y : merge (x:xs) ys
+
+-- 2.24 b)
+metades :: [a] -> ([a],[a])
+metades [] = ([],[])
+metades [x] = ([x],[])
+metades (x:x1:xs) = (x:z, x1:z1)
+  where (z,z1) = metades xs
+
+mergeSort :: Ord a => [a] -> [a]
+mergeSort [] = []
+mergeSort [x] = [x]
+mergeSort xs = merge (mergeSort left) (mergeSort right)
+  where (left,right) = metades xs
