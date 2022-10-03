@@ -1,0 +1,2 @@
+-- a) myList = [(x,5-x) | x <- [0..5]]
+-- b) funList n = [(x,n-x) | x <- [0..n]]
