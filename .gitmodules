@@ -1,0 +1,3 @@
+[submodule "Project/PFL-Project"]
+	path = Project/PFL-Project
+	url = git@github.com:pedronunomacedo/PFL-Project.git
