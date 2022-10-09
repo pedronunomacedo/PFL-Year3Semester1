@@ -1,6 +1,6 @@
 import Data.Char
 
---------------- Divide the given array in parts ---------------
+--------------- Divide the given array in string parts ---------------
 
 splitArray :: [Char] -> [[Char]]
 splitArray [] = [[]]
