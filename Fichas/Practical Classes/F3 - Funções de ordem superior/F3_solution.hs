@@ -62,3 +62,21 @@ myReverse2 l = foldl (\x y -> [y] ++ x) [] l
 -- 3.7 e)
 myElem :: Eq a => a -> [a] -> Bool
 myElem n l = any (n==) l
+
+-- 3.8 a)
+myPalavras :: String -> [String]
+myPalavras [] = []
+myPalavras l
+        | ((any (== ' ') l) == False) = [l]
+        | otherwise = (takeWhile (/= ' ') l):(myPalavras (tail (dropWhile (/= ' ') l)))
+
+-- 3-8 b)
+myDespalavras :: [String] -> String
+myDespalavras [x] = x
+myDespalavras (x:xs) = x ++ " " ++ myDespalavras xs
+
+-- 3.9
+myScanl :: (a -> b -> a) -> a -> [b] -> [a]
+myScanl f n [l] = [f n l]
+myScanl f n (x:xs) = accumulator:(myScanl f accumulator xs)
+  where accumulator = (f n x)
