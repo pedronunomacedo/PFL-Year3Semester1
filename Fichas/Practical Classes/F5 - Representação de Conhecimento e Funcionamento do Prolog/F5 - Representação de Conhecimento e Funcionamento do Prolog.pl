@@ -117,10 +117,17 @@ grandmother(X,Y) :-
     grandparent(X,Y).
 
 siblings(X,Y) :-
-    parent(Z,X), 
-    parent(Z,Y).
+    parent(P1,X),
+    parent(P2,X),
+    parent(P1,Y),
+    parent(P2,Y),
+    (X \= Y)
+    (P1 \= P2).
 
-sameMother(X,Y) :-
-    parent(Z,X), 
-    parent(Z,Y),
-    female(Z).
+halfSiblings(X,Y) :-
+    \+siblings(X,Y), 
+    parent(P,X),
+    parent(P,Y),
+    (X \= Y).    
+
+
