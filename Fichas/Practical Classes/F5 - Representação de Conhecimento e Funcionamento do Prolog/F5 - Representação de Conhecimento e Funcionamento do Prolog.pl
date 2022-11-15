@@ -121,13 +121,14 @@ siblings(X,Y) :-
     parent(P2,X),
     parent(P1,Y),
     parent(P2,Y),
-    (X \= Y)
+    (X \= Y),
     (P1 \= P2).
 
-halfSiblings(X,Y) :-
-    \+siblings(X,Y), 
+halfSiblings(X,Y) :- 
     parent(P,X),
     parent(P,Y),
-    (X \= Y).    
+    X \= Y,
+    \+siblings(X,Y).
 
+cousins(X,Y) :- 
 
