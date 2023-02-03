@@ -122,6 +122,7 @@ siblings(X,Y) :-
     parent(P1,Y),
     parent(P2,Y),
     (X \= Y),
+    % (X @< Y), 
     (P1 \= P2).
 
 halfSiblings(X,Y) :- 
@@ -131,4 +132,33 @@ halfSiblings(X,Y) :-
     \+siblings(X,Y).
 
 cousins(X,Y) :- 
+    parent(PX, X),
+    parent(PY, Y), 
+    siblings(PX, PY), 
+    (X \= Y), 
+    (PX \= PY).
+
+uncle(X,Y) :-
+    parent(PY, Y), 
+    siblings(X, PY), 
+    male(X).
+
+%1d
+
+% | ?- cousins('Haley','Lily').
+% yes
+
+% | ?- father(X, 'Luke'), write(X), nl, fail.
+% Phil
+% no
+
+% | ?- uncle(X, 'Lily'), write(X), nl, fail.
+% no
+
+% | ?- grandparent(X, 'Lily'), write(X), nl, fail.
+% DeDe
+% Jay
+% Barb
+% Merle
+% no
 

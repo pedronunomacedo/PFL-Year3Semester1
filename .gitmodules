@@ -1,3 +1,6 @@
 [submodule "Project/PFL-Project"]
 	path = Project/PFL-Project
 	url = git@github.com:pedronunomacedo/PFL-Project.git
+[submodule "Project/2nd-PFL-Project"]
+	path = Project/2nd-PFL-Project
+	url = git@github.com:pedronunomacedo/2nd-PFL-Project.git
